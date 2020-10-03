@@ -17,20 +17,20 @@ let currentActiveCard = 0;
 const cardsEl = [];
 
 // Store card data
-const cardsData = [
-    {
-        question: 'How many Earths could fit inside the sun?',
-        answer:'1.3 million'
-    },
-    {
-        question: 'Which country consumes the most chocolate per capita?',
-        answer:'Switzerland'
-    },
-    {
-        question: 'How many languages are written from right to left?',
-        answer:'12'
-    }
-];
+// const cardsData = [
+//     {
+//         question: 'How many Earths could fit inside the sun?',
+//         answer:'1.3 million'
+//     },
+//     {
+//         question: 'Which country consumes the most chocolate per capita?',
+//         answer:'Switzerland'
+//     },
+//     {
+//         question: 'How many languages are written from right to left?',
+//         answer:'12'
+//     }
+// ];
 
 // Create all cards 
 function createCards() {
@@ -77,3 +77,33 @@ function updateCurrentText() {
 }
 
 createCards();
+
+// Event Listeners 
+
+nextBtn.addEventListener('click', () => {
+    cardsEl[currentActiveCard].className ='card left';
+
+    currentActiveCard = currentActiveCard + 1;
+
+    if(currentActiveCard > cardsEl.length - 1) {
+        currentActiveCard = cardsEl.length - 1;
+    }
+
+    cardsEl[currentActiveCard].className = 'card active';
+
+    updateCurrentText();
+});
+
+prevBtn.addEventListener('click', () => {
+    cardsEl[currentActiveCard].className ='card right';
+
+    currentActiveCard = currentActiveCard - 1;
+
+    if(currentActiveCard < 0) {
+        currentActiveCard = 0;
+    }
+
+    cardsEl[currentActiveCard].className = 'card active';
+
+    updateCurrentText();
+});
