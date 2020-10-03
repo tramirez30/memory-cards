@@ -17,6 +17,9 @@ let currentActiveCard = 0;
 const cardsEl = [];
 
 // Store card data
+const cardsData = getCardsData();
+
+
 // const cardsData = [
 //     {
 //         question: 'How many Earths could fit inside the sun?',
@@ -76,10 +79,20 @@ function updateCurrentText() {
     currentEl.innerText = `${ currentActiveCard + 1 }/${cardsEl.length}`
 }
 
+// Get cards from local storage
+function getCardsData() {
+    const cards = JSON.parse(localStorage.getItem('cards'));
+    return cards === null ? [] : cards;
+}
+
+
+
 createCards();
 
 // Event Listeners 
 
+
+// Next Button
 nextBtn.addEventListener('click', () => {
     cardsEl[currentActiveCard].className ='card left';
 
@@ -94,6 +107,8 @@ nextBtn.addEventListener('click', () => {
     updateCurrentText();
 });
 
+
+// Previous Button
 prevBtn.addEventListener('click', () => {
     cardsEl[currentActiveCard].className ='card right';
 
@@ -107,3 +122,11 @@ prevBtn.addEventListener('click', () => {
 
     updateCurrentText();
 });
+
+// Show add container
+
+showBtn.addEventListener('click', () => addContainer.classList.add('show'));
+
+// Hide add container
+
+hideBtn.addEventListener('click', () => addContainer.classList.remove('show'));
