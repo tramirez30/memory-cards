@@ -85,7 +85,11 @@ function getCardsData() {
     return cards === null ? [] : cards;
 }
 
-
+// Add card to local storage 
+function setCardsData(cards) {
+    localStorage.setItem('cards', JSON.stringify(cards));
+    window.location.reload();
+}
 
 createCards();
 
@@ -130,3 +134,30 @@ showBtn.addEventListener('click', () => addContainer.classList.add('show'));
 // Hide add container
 
 hideBtn.addEventListener('click', () => addContainer.classList.remove('show'));
+
+// Add new card 
+addCardBtn.addEventListener('click', () => {
+    const question = questionEl.value;
+    const answer = answerEl.value;
+    
+    if(question.trim() && answer.trim()) {
+        const newCard = { question, answer };
+
+        createCard(newCard);
+
+        questionEl.value = ``;
+        answerEl.value = ``;
+
+        addContainer.classList.remove('show');
+
+        cardsData.push(newCard);
+        setCardsData(cardsData);
+    }
+});
+
+// Clear cards button
+clearBtn.addEventListener('click', () => {
+    localStorage.clear();
+    cardsContainer.innerHTML = '';
+    window.location.reload();
+});
